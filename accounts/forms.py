@@ -5,10 +5,10 @@ from .models import CustomUser
 class CustomUserCreationForm(UserCreationForm):
     class Meta(UserCreationForm):
         model = CustomUser
-        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2')
+        fields = ('username', 'first_name', 'last_name', 'email','password1', 'password2')
 
 
 class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = CustomUser
-        fields = ('username', 'first_name', 'last_name', 'email')
+        fields = ('username', 'first_name', 'last_name', 'email','password')
