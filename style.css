@@ -301,7 +301,10 @@ position: absolute;
     transform: translateY(-10px);
     font-size: 3rem;
 }
-
+.wow{
+    transform: translateX(20px);
+    position: relative;
+}
 @media (max-width:990px){
 
     
