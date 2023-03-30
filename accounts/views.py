@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.contrib.auth import login, get_user_model
 from .forms import CustomUserCreationForm
 from django.contrib.auth.views import LoginView
@@ -27,5 +28,7 @@ class RegisterView(FormView):
             login(self.request, user)
         return super(RegisterView, self).form_valid(form)
 
+def view_Ads(request, ads_id):
+    return HttpResponse("Przeglądasz ogłoszenie %s." % ads_id)
 
 
