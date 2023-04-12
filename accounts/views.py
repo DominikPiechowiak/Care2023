@@ -28,7 +28,5 @@ class RegisterView(FormView):
             login(self.request, user)
         return super(RegisterView, self).form_valid(form)
 
-def view_Ads(request, ads_id):
-    return HttpResponse("Przeglądasz ogłoszenie %s." % ads_id)
 
 
