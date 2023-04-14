@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Przeglądanie ogłoszeń opiekunów</h1>
+  <ul>
+    {% for ads in object_list %}
+      <li>
+        {{ ads.user }}
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
