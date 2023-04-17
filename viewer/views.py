@@ -14,7 +14,7 @@ class AdCreateView(CreateView):
 
     template_name = 'form.html'
     form_class = AdForm
-    success_url = reverse_lazy('')
+    success_url = reverse_lazy('index')
 
     def form_invalid(self, form):
         LOGGER.warning('Wprowadzono błędne dane')
