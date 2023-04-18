@@ -3,7 +3,6 @@ from accounts.models import CustomUser
 
 
 class Advertisement(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     first_name = CustomUser.first_name
     last_name = CustomUser.last_name
     email = CustomUser.email

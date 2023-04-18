@@ -1,39 +1,66 @@
-from django.http import HttpResponse
-from django.contrib.auth import login, get_user_model
-from .forms import CustomUserCreationForm
-from django.contrib.auth.views import LoginView
-from django.urls import reverse_lazy
-from django.views.generic import FormView
+from django.contrib.auth.forms import AuthenticationForm
+from django.shortcuts import redirect, render
+from django.contrib.auth import get_user_model, login, logout, authenticate
+from django.contrib import messages
+from .forms import UserRegistrationForm
+from django.contrib.auth.decorators import login_required
+
+...
+
+def register(request):
+    if request.user.is_authenticated:
+        return redirect('/')
+
+    if request.method == "POST":
+        form = UserRegistrationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request,user)
+            messages.success(request, f"New account Created: {user.username}")
+            return redirect('/')
+        else:
+            for error in list(form.errors.values()):
+                messages.error(request,error)
+
+    else:
+        form = UserRegistrationForm()
+
+    return render(
+        request= request,
+        template_name="register.html",
+        context={"form": form}
+    )
 
 
-# Create your views here.
-User = get_user_model()
+def custom_login(request):
+    if request.user.is_authenticated:
+        return redirect('index')
 
+    if request.method == 'POST':
+        form = AuthenticationForm(request=request, data=request.POST)
+        if form.is_valid():
+            user = authenticate(
+                username=form.cleaned_data['username'],
+                password=form.cleaned_data['password'],
+            )
+            if user is not None:
+                login(request, user)
+                messages.success(request, f"Hello <b>{user.username}</b>! You have been logged in")
+                return redirect('index')
 
-class CustomLoginView(LoginView):
-    template_name = "login.html"
-    fields = "__all__"
-    #redirect_authenticated_user = True
-    success_url = reverse_lazy('index')
+        else:
+            for error in list(form.errors.values()):
+                messages.error(request, error)
 
+    form = AuthenticationForm()
 
-class RegisterView(FormView):
-    template_name = "register.html"
-    form_class = CustomUserCreationForm
-    # redirect_authenticated_user = True
-    # success_url = reverse_lazy("index")
-
-class MainView(FormView):
-    template_name = "main.html"
-    form_class = CustomUserCreationForm
-    # redirect_authenticated_user = True
-    # success_url = reverse_lazy("index")
-
-    def form_valid(self, form):
-        user = form.save()
-        if user is not None:
-            login(self.request, user)
-        return super(RegisterView, self).form_valid(form)
-
-
-
+    return render(
+        request=request,
+        template_name="login.html",
+        context={'form': form}
+    )
+@login_required
+def custom_logout(request):
+    logout(request)
+    messages.info(request, "Logged out successfully!")
+    return redirect("index")
