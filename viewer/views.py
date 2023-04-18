@@ -12,7 +12,7 @@ LOGGER = getLogger()
 
 class AdCreateView(CreateView):
 
-    template_name = 'form.html'
+    template_name = '../Care2023/templates/viewer/form.html'
     form_class = AdForm
     success_url = reverse_lazy('index')
 
