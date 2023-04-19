@@ -3,8 +3,6 @@ from accounts.models import CustomUser
 
 
 class Advertisement(models.Model):
-    first_name = CustomUser.first_name
-    last_name = CustomUser.last_name
     email = CustomUser.email
     age = models.IntegerField()
     education = models.CharField(max_length=64)

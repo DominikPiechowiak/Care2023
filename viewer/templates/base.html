@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-
+<h1><a href="{% url 'index' %}?next={{request.path}}">Care2023</a></h1>
 <html>
     <body>
-        <h1>Strona Główna</h1>
             <p>Zalogowany jest użytkownik: {{ user }} </p>
             <div class="nav-bar-r">
                 <ul>
                 {% if request.user.is_authenticated %}
                     <li><a href="{% url 'logout' %}?next={{request.path}}">Logout</a></li>
                     <li><a href="{% url 'Ad_create' %}?next={{request.path}}">Add advertisement</a></li>
+                    <li><a href="{% url 'password' %}?next={{request.path}}">Change password</a></li>
                 {% else %}
                     <li><a href="{% url 'login' %}?next={{request.path}}">Sign in</a></li>
                     <li><a href="{% url 'register' %}">Register</a></li>
