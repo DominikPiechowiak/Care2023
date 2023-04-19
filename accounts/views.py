@@ -44,14 +44,16 @@ def custom_login(request):
                 username=form.cleaned_data['username'],
                 password=form.cleaned_data['password'],
             )
+
             if user is not None:
                 login(request, user)
                 messages.success(request, f"Hello <b>{user.username}</b>! You have been logged in")
-                return redirect('index')
+                return redirect('login')
 
         else:
             for error in list(form.errors.values()):
                 messages.error(request, error)
+                return redirect('login')
 
     form = AuthenticationForm()
 

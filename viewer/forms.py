@@ -9,12 +9,13 @@ class AdForm(ModelForm):
         model = Advertisement
         fields = '__all__'
 
-# class EditAd(ModelEdit):
-#     class Meta:
-#         model = Advertisement
-#         fields = '__all__'
-#     first_name = IntegerField
-#     user_id = IntegerField(initial=CustomUser.id)
+    # class EditAd(ModelEdit):
+    #     class Meta:
+    #         model = Advertisement
+    #         fields = '__all__'
+    #     first_name = IntegerField
+    #     user_id = IntegerField(initial=CustomUser.id)
     age = IntegerField(min_value=1, max_value=120)
     experience = IntegerField(min_value=0, max_value=50)
     pub_date = DateField(initial=datetime.today())
+
