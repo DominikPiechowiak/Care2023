@@ -35,7 +35,7 @@ def register(request):
 
 def custom_login(request):
     if request.user.is_authenticated:
-        return redirect('index')
+        return redirect('posts')
 
     if request.method == 'POST':
         form = AuthenticationForm(request=request, data=request.POST)
@@ -68,7 +68,7 @@ def custom_login(request):
 def custom_logout(request):
     logout(request)
     messages.info(request, "Logged out successfully!")
-    return redirect("index")
+    return redirect("posts")
 
 
 def change_password(request):
@@ -78,7 +78,7 @@ def change_password(request):
             user = form.save()
             update_session_auth_hash(request, user)  # Important!
             messages.success(request, 'Your password was successfully updated!')
-            return redirect('index')
+            return redirect('posts')
         else:
             messages.error(request, 'Please correct the error below.')
     else:

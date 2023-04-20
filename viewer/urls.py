@@ -1,9 +1,9 @@
 from django.urls import path
-from .views import AdCreateView, AdsView
+from . import views
 
 urlpatterns = [
-    path('', AdsView.as_view(), name='index'),
-    path('ad/create', AdCreateView.as_view(), name='Ad_create'),
-    #path('Ad/update/<pk>', AdUpdateView.as_view(), name='Ad_update'),
-    #path('Ad/delete/<pk>', AdDeleteView.as_view(), name='Ad_delete')
+    path('', views.home, name='posts'),
+    path('post_create', views.create_post, name='post-create'),
+    path('post/edit/<int:id>/', views.edit_post, name='post-edit'),
+    path('about/', views.about, name='about'),
 ]
