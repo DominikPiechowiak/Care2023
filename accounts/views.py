@@ -41,7 +41,7 @@ def user_login(request):
 def register(request):
     if request.method == 'POST':
         user_form = UserRegistrationForm(request.POST)
-        if user_form.is_valid():
+        if user_form.is_valid():Ja d
             new_user = user_form.save(commit=False)
             new_user.set_password(user_form.cleaned_data['password'])
             new_user.save()
